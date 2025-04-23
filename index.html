@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Biomethane in Southeast Asia: Thailand, Indonesia, and Malaysia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        /* Base styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        /* Main container */
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            overflow: hidden;
+        }
+        
+        /* Header section */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .dashboard-title {
+            color: #2c3e50;
+            margin: 0 0 8px 0;
+            font-size: 28px;
+        }
+        
+        .dashboard-subtitle {
+            color: #7f8c8d;
+            margin: 0;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+        
+        /* Legend styling */
+        .custom-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 25px;
+            padding: 10px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 0 15px 10px 0;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+        
+        .legend-label {
+            font-size: 14px;
+        }
+        
+        /* Key takeaways section */
+        .key-takeaways {
+            background-color: #f1f8ff;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+        
+        .key-takeaways h3 {
+            margin-top: 0;
+            color: #2980b9;
+            font-size: 20px;
+        }
+        
+        .key-takeaways ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        
+        .key-takeaways li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        /* Footnote */
+        .data-footnote {
+            font-size: 12px;
+            color: #95a5a6;
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        /* Country flag icons (SVG-based) */
+        .country-flags {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .flag-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+        }
+        
+        .flag-svg {
+            width: 60px;
+            height: 40px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .flag-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 15px;
+            }
+            
+            .dashboard-title {
+                font-size: 22px;
+            }
+            
+            .dashboard-subtitle {
+                font-size: 14px;
+            }
+            
+            .chart-container {
+                height: 350px;
+            }
+            
+            .key-takeaways {
+                padding: 15px;
+            }
+            
+            .key-takeaways h3 {
+                font-size: 18px;
+            }
+            
+            .key-takeaways li {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .dashboard-container {
+                padding: 12px;
+            }
+            
+            .dashboard-title {
+                font-size: 20px;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .flag-svg {
+                width: 50px;
+                height: 33px;
+            }
+            
+            .flag-label {
+                font-size: 12px;
+            }
+            
+            .legend-item {
+                margin: 0 10px 8px 0;
+            }
+            
+            .legend-label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Dashboard header -->
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Biomethane Production and Potential in Southeast Asia</h1>
+            <h2 class="dashboard-subtitle">Comparing Thailand, Indonesia, and Malaysia's Current Capacity and Targets</h2>
+        </div>
+        
+        <!-- Country flags for visual appeal -->
+        <div class="country-flags">
+            <!-- Thailand flag (SVG) -->
+            <div class="flag-container">
+                <svg class="flag-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="900" height="600" fill="#ED1C24"/>
+                    <rect width="900" height="400" y="100" fill="#F5F5F5"/>
+                    <rect width="900" height="200" y="200" fill="#241D4F"/>
+                </svg>
+                <span class="flag-label">Thailand</span>
+            </div>
+            
+            <!-- Indonesia flag (SVG) -->
+            <div class="flag-container">
+                <svg class="flag-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="900" height="600" fill="#FFFFFF"/>
+                    <rect width="900" height="300" fill="#FF0000"/>
+                </svg>
+                <span class="flag-label">Indonesia</span>
+            </div>
+            
+            <!-- Malaysia flag (SVG) -->
+            <div class="flag-container">
+                <svg class="flag-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="900" height="600" fill="#FFFFFF"/>
+                    <rect width="900" height="42.9" fill="#CC0001"/>
+                    <rect width="900" height="42.9" y="85.8" fill="#CC0001"/>
+                    <rect width="900" height="42.9" y="171.6" fill="#CC0001"/>
+                    <rect width="900" height="42.9" y="257.4" fill="#CC0001"/>
+                    <rect width="900" height="42.9" y="343.2" fill="#CC0001"/>
+                    <rect width="900" height="42.9" y="429" fill="#CC0001"/>
+                    <rect width="900" height="42.9" y="514.8" fill="#CC0001"/>
+                    <rect width="450" height="300" fill="#00209F"/>
+                    <circle cx="225" cy="150" r="75" fill="#FFCC00"/>
+                    <path d="M225,95 L249,160 L188,120 H262 L201,160 Z" fill="#FFCC00"/>
+                </svg>
+                <span class="flag-label">Malaysia</span>
+            </div>
+        </div>
+        
+        <!-- Chart container -->
+        <div class="chart-container">
+            <canvas id="biomethaneChart"></canvas>
+        </div>
+        
+        <!-- Custom legend -->
+        <div class="custom-legend" id="customLegend"></div>
+        
+        <!-- Key takeaways section -->
+        <div class="key-takeaways">
+            <h3>Key Takeaways</h3>
+            <ul>
+                <li><strong>Thailand leads the region</strong> with 335 MW of current biogas capacity and an ambitious target of 5,570 MW by 2036, supported by strong feed-in tariffs and tax incentives.</li>
+                <li><strong>Indonesia</strong> aims to achieve 810 MW of bioenergy by 2025, utilizing its abundant palm oil waste. The country hosts Asia's largest compressed biogas plant in Langkat Regency.</li>
+                <li><strong>Malaysia</strong> has shown rapid growth with 68 MW installed capacity and 73 MW in development. Its biomethane sector has grown 400% since 2014, primarily using palm oil mill effluent (POME).</li>
+                <li><strong>Total regional capacity</strong> of approximately 1 GW demonstrates Southeast Asia's commitment to biomethane as a strategic renewable energy solution.</li>
+                <li><strong>Primary feedstocks</strong> across the region include palm oil waste, livestock manure, and agricultural residues, highlighting the agricultural sector's importance in biomethane production.</li>
+            </ul>
+        </div>
+        
+        <p class="data-footnote">Note: Data compiled from regional reports and government targets as of 2023. Future targets subject to policy adjustments.</p>
+    </div>
+
+<!-- SEO Backlink to PVE -->
+<p style="text-align:center; margin-top: 20px;">
+  <a href="https://www.pvegroup.asia/articles-biomethane-biocng-biolng-hydrogen/biomethane-in-thailand-indonesia-malaysia.html" target="_blank" rel="dofollow">
+    Learn more about Biomethane situation in Thailand, Indonesia and Malaysia from PVE Group
+  </a>
+</p>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the canvas element
+            const ctx = document.getElementById('biomethaneChart').getContext('2d');
+            
+            // Data for the chart
+            const countries = ['Thailand', 'Indonesia', 'Malaysia'];
+            
+            // Current and target capacities for each country (in MW)
+            const currentCapacity = [335, 0, 68]; // Current capacity 
+            const targetCapacity = [5570, 810, 141]; // Thailand 2036, Indonesia 2025, Malaysia (current + in development)
+            const inDevelopment = [0, 0, 73]; // Only Malaysia has specific "in development" data
+            
+            // Define chart colors
+            const colors = {
+                current: {
+                    backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                    borderColor: 'rgba(52, 152, 219, 1)'
+                },
+                target: {
+                    backgroundColor: 'rgba(46, 204, 113, 0.7)',
+                    borderColor: 'rgba(46, 204, 113, 1)'
+                },
+                inDevelopment: {
+                    backgroundColor: 'rgba(155, 89, 182, 0.7)',
+                    borderColor: 'rgba(155, 89, 182, 1)'
+                }
+            };
+            
+            // Create the chart
+            const chart = new Chart(ctx, {
+                type: 'bar', // Bar chart for easy comparison
+                data: {
+                    labels: countries,
+                    datasets: [
+                        {
+                            label: 'Current Capacity (MW)',
+                            data: currentCapacity,
+                            backgroundColor: colors.current.backgroundColor,
+                            borderColor: colors.current.borderColor,
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            barPercentage: 0.7
+                        },
+                        {
+                            label: 'Target Capacity (MW)',
+                            data: targetCapacity,
+                            backgroundColor: colors.target.backgroundColor,
+                            borderColor: colors.target.borderColor,
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            barPercentage: 0.7
+                        },
+                        {
+                            label: 'In Development (MW)',
+                            data: inDevelopment,
+                            backgroundColor: colors.inDevelopment.backgroundColor,
+                            borderColor: colors.inDevelopment.borderColor,
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            barPercentage: 0.7
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false // Hide default legend, we're using custom one
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 10,
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + ' MW';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                },
+                                callback: function(value) {
+                                    return value + ' MW';
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Capacity (Megawatts)',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                padding: {
+                                    top: 0,
+                                    bottom: 10
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+            
+            // Create custom legend
+            const legendContainer = document.getElementById('customLegend');
+            const legendItems = [
+                { label: 'Current Capacity (MW)', color: colors.current.backgroundColor },
+                { label: 'Target Capacity (MW)', color: colors.target.backgroundColor },
+                { label: 'In Development (MW)', color: colors.inDevelopment.backgroundColor }
+            ];
+            
+            legendItems.forEach(item => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+                
+                const colorBox = document.createElement('div');
+                colorBox.className = 'legend-color';
+                colorBox.style.backgroundColor = item.color;
+                
+                const label = document.createElement('span');
+                label.className = 'legend-label';
+                label.textContent = item.label;
+                
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(label);
+                legendContainer.appendChild(legendItem);
+            });
+            
+            // Function to handle responsiveness
+            function adjustChartForScreenSize() {
+                const width = window.innerWidth;
+                if (width < 480) {
+                    // Mobile adjustments
+                    chart.options.scales.x.ticks.font.size = 10;
+                    chart.options.scales.y.ticks.font.size = 10;
+                    chart.options.scales.y.title.font.size = 12;
+                } else if (width < 768) {
+                    // Tablet adjustments
+                    chart.options.scales.x.ticks.font.size = 12;
+                    chart.options.scales.y.ticks.font.size = 11;
+                    chart.options.scales.y.title.font.size = 13;
+                } else {
+                    // Desktop (default)
+                    chart.options.scales.x.ticks.font.size = 14;
+                    chart.options.scales.y.ticks.font.size = 12;
+                    chart.options.scales.y.title.font.size = 14;
+                }
+                chart.update();
+            }
+            
+            // Initial adjustment
+            adjustChartForScreenSize();
+            
+            // Adjust on window resize
+            window.addEventListener('resize', adjustChartForScreenSize);
+        });
+    </script>
+</body>
+</html>
